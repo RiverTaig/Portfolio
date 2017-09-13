@@ -9,12 +9,17 @@
 		<title>River Taig Portfolio</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 	</head>
 	<body>
+        <!--<div id="rotating-item-wrapper">
+            <img class="rotating-item" src="images/RiverSmall0.jpg" />
+            <img class="rotating-item" src="images/RiverSmall1.jpg" />
+        </div>-->
 		<!-- Wrapper -->
 			<div id="wrapper">
 
@@ -24,7 +29,7 @@
 
 							<!-- Logo -->
 								<a href="https://youtu.be/OsDnrFBpsBk?t=89" class="logo">
-									<span class="symbol"><img src="images/Riverlogo.jpg" alt="" /></span><span class="title">And a River Runs Through it... </span>
+									<span class="symbol"><img src="images/Riverlogo.jpg" alt="" /></span><span class="title">Eventually, all things merge into one, and a River Runs Through it... </span>
 								</a>
 
 							<!-- Nav -->
@@ -55,18 +60,18 @@
 					<div id="main">
 						<div class="inner">
 							<header>
-                                <div id="cf2" class="shadow">
-                                    <img class="bottom" src="images/RiverSmall2.jpg" />
-                                    <img class="top" src="images/RiverSmall.jpg" />
+                                <div id="rotating-item-wrapper" >
+                                    <img class="rotating-item" src="images/RiverSmall0.jpg" />
+                                    <img class="rotating-item" src="images/RiverSmall1.jpg" />
                                 </div>
-                                <h1>
+                                <h1 style="margin-left:160px">
 
                                     <!--<p id="cf_onclick">Click me to toggle</p>-->
                                     iam quis viverra lorem, in semper lo<br />
                                 
                                 </h1>
 								
-								<p>Etiam quis viverra lorem, in semper lorem. Sed nisl arcu euismod sit amet nisi euismod sed cursus arcu elementum ipsum arcu vivamus quis venenatis orci lorem ipsum et magna feugiat veroeros aliquam. Lorem ipsum dolor sit amet nullam dolore.</p>
+								<div>Etiam quis viverra lorem, in semper lorem. Sed nisl arcu euismod sit amet nisi euismod sed cursus arcu elementum ipsum arcu vivamus quis venenatis orci lorem ipsum et magna feugiat veroeros aliquam. Lorem ipsum dolor sit amet nullam dolore.</div>
 							</header>
 							<section class="tiles">
 								<article class="style1">
@@ -82,12 +87,12 @@
 								</article>
 								<article class="style2">
 									<span class="image">
-										<img src="images/pic02.jpg" alt="" />
+										<img src="images/Maze.jpg" alt="" />
 									</span>
-									<a href="generic.html">
+									<a href="Maze.html">
 										<h2>Maze Solver</h2>
 										<div class="content">
-											<p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+											<p style="-webkit-text-stroke-width: 1px;-webkit-text-fill-color: white;font-weight:500; -webkit-text-stroke-color: black;">I suppose most adults probably haven't tried to work a maze since...oh...5th grade?  This sample brings together my childhood love of mazes with my interest in algorithms and web design.  This fun sample will solve most any maze you throw at it, and along the way you'll learn a little about image analyis, breadth-first-searches, and rendering results on screen that are engaging to the user.</p>
 										</div>
 									</a>
 								</article>
@@ -248,11 +253,14 @@
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"> </script>	
+        <script src="assets/js/skel.min.js"></script>
 			<script src="assets/js/util.js"></script>
             <script src="assets/js/river.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
+            
+
 
 	</body>
 
