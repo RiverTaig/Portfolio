@@ -1,0 +1,1 @@
+﻿Great article on using Javascript for animations instead of CSS: https://css-tricks.com/myth-busting-css-animations-vs-javascript/

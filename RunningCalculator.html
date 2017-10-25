@@ -1,0 +1,207 @@
+﻿<!DOCTYPE HTML>
+<!--
+    Phantom by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>Generic - Phantom by HTML5 UP</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <style>
+input[type="radio"] + label {
+    color:#a2a2a2;
+    font-family:Arial, sans-serif;
+}
+button.close {
+    box-shadow:none ;
+}
+input[type="radio"] + label span {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-2px 10px 0 0;
+    vertical-align:middle;
+    
+    cursor:pointer;
+}
+
+input[type="radio"]:checked + label span {
+   
+}
+    </style>
+</head>
+<body>
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <div class="inner">
+
+                <!-- Logo -->
+                <a href="index.html" class="logo">
+                    <span class="symbol"><img src="images/RiverLogo.jpg" alt="" /></span><span class="title">River Taig's Portfoloio</span>
+                </a>
+
+                <!-- Nav -->
+                <nav>
+                    <ul>
+                        <li><a href="#menu">Menu</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+        </header>
+
+        <!-- Menu -->
+        <nav id="menu">
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="generic.html">Ipsum veroeros</a></li>
+                <li><a href="generic.html">Tempus etiam</a></li>
+                <li><a href="generic.html">Consequat dolor</a></li>
+                <li><a href="elements.html">Elements</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main -->
+        <div id="main">
+            <div class="inner">
+                <h1>Running Calculator</h1>
+                <p>
+                    Every serious runner will, from time to time, need to do a little (or a lot!) of math to find answers to some really basic questions.  For example:
+                    <ul>
+                        <li>If I run a 3:15 marathon, what should my split be for 10km? </li>
+                        <li>If I want to run at a pace of 7:30/mile, what speed in miles per hour (mph) is that on a treadmill? </li>
+                        <li>If I can run 42:37 for a 10K, what would my predicted half marathon time be?  </li>
+                        <li>If I lost 10 pounds, how much faster could I run for 5K? </li>
+                        <li>When training for a marathon, what is my 'lactate threshold' pace?</li>
+                        <li>How does temperature, wind, elevation, climbing, and running on a treadmill with an incline affect my performance?</li>
+                    </ul>
+                <p>Now, you can find a million calculators on-line that will answer these questions, but I think you won't find the kind of one-stop-shopping you'll experience here. </p>
+                <button type="button"  data-toggle="modal" data-target="#myModal">Let's get started!</button>
+                <div style="width:100%">
+                    <table style="column-count:5">
+                        <tr > 
+                            <td style="grid-column-span:5">Let's learn a litte about you and a recent run.  The running calculator can then use those values to determine, splits, 
+                            training paces, race predictions, age-graded analysis and much more </td>  
+                        </tr>
+                        <tr>
+                            <td style="grid-column-span:2">I am a </td>
+                            <td style="grid-column-span:2"><input type="number" id="txt_rc_age" placeholder="48" /> year old </td> 
+                            <td style="grid-column-span:1">
+                                <select> 
+                                    <option value="M">Male</option>
+                                    <option value="F">Female</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="container">
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Time, Distance, Velocity</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>If I run...</p>
+                            <div class="row">
+                                <div class="span12">
+                                    <input type="radio" id="r0" name="rr" />
+                                    <label for="r0"><span></span>Time and Distance</label>
+                                    <input type="radio" id="r1" name="rr" />
+                                    <label for="r1"><span></span>Time and Pace</label>
+                                    <input type="radio" id="r2" name="rr" />
+                                    <label for="r2"><span></span>Time and Speed</label>
+                                    <input type="radio" id="r3" name="rr" />
+                                    <label for="r3"><span></span>Distance and Speed</label>
+                                    <input type="radio" id="r4" name="rr" />
+                                    <label for="r4"><span></span>Distance and Pace</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="span12">
+                                    this is a test of the emergency broadcast system...we are hoping that this doesn't wrap? or are we?
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <!-- Footer -->
+        <footer id="footer">
+            <div class="inner">
+                <section>
+                    <h2>Get in touch</h2>
+                    <form method="post" action="#">
+                        <div class="field half first">
+                            <input type="text" name="name" id="name" placeholder="Name" />
+                        </div>
+                        <div class="field half">
+                            <input type="email" name="email" id="email" placeholder="Email" />
+                        </div>
+                        <div class="field">
+                            <textarea name="message" id="message" placeholder="Message"></textarea>
+                        </div>
+                        <ul class="actions">
+                            <li><input type="submit" value="Send" class="special" /></li>
+                        </ul>
+                    </form>
+                </section>
+                <section>
+                    <h2>Follow</h2>
+                    <ul class="icons">
+                        <li><a href="#" class="icon style2 fa-twitter"><span class="label">Twitter</span></a></li>
+                        <li><a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
+                        <li><a href="#" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
+                        <li><a href="#" class="icon style2 fa-dribbble"><span class="label">Dribbble</span></a></li>
+                        <li><a href="#" class="icon style2 fa-github"><span class="label">GitHub</span></a></li>
+                        <li><a href="#" class="icon style2 fa-500px"><span class="label">500px</span></a></li>
+                        <li><a href="#" class="icon style2 fa-phone"><span class="label">Phone</span></a></li>
+                        <li><a href="#" class="icon style2 fa-envelope-o"><span class="label">Email</span></a></li>
+                    </ul>
+                </section>
+                <ul class="copyright">
+                    <li>&copy; Untitled. All rights reserved</li>
+                    <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                </ul>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/skel.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="assets/js/main.js"></script>
+
+</body>
+</html>

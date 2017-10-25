@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+
+
+    <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script  src="assets/js/PuzzlePal.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.js"></script>
+    <script src="spectrum.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <link rel="stylesheet"  href="assets/css/PuzzlePal.css" />
+    <link rel="stylesheet" href="assets/css/Spectrum.css" />
+</head>
+<body>
+    <canvas width="816" height="1056" id="myCanvas"></canvas>
+    <!--
+      <button id="drawit">Draw</button>-->
+
+    <div class="container dialog2">
+        <div class="main">
+            <div title="Create Puzzle Piece Print Templates" id="dialog">
+                <form action="" method="post">
+                    <div class="wrapper2">
+                        <div class="sidebar2">
+                            <img class="rotate45" id="imgPuzzlePiece" align="left" margin-top="-80px" margin-right="25px" width="50" height="50" src="images/pp.png" />
+                        </div>
+                        <div class="content2">
+                            You can use this form to print out the templates required for photographing your puzzle pieces or to replace templates you have already printed. Choose background colors that strongly contrast with the colors of your puzzle. White is a good choice for
+                            most puzzles, but you will likely need other colors too. Select the number of pieces per page such that each piece fits comfortably in its color patch.
+                            <!--It's a good idea to print out a test page. Remember when you photograph each page to orient the pieces so that the pieces corners "point to" the corners of the color patch.-->
+                        </div>
+                        <div class="cleared2"></div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="wrapper">
+                        <div class="content">
+                            <!--START NUMBER -->
+                            <label class="colorLabel">Start - End Piece :</label>
+                            <br />
+                            <input name="total" class="smallNumber" value="1" id="start" type="number" min="1" max="6560" /> -
+                            <input name="end" class="smallNumber" id="end" value="1026" type="number" min="1" max="6560" />
+                            <label class="lblUpdateableNumber" id="lblPieceCount"></label>
+                            <br />
+                            <label class="colorLabel">Layout: </label>
+                            <br />
+                            <select value="5" id="cboLayout">
+                                <option value="6">3x2 = 6</option>
+                                <option value="9">3x3 = 9</option>
+                                <option value="8">4x2 = 8</option>
+                                <option value="12">4x3 = 12</option>
+                                <option value="16">4x4 = 16</option>
+                                <option selected="selected" value="15">5x3 = 15</option>
+                                <option value="20">5x4 = 20</option>
+                                <option value="25">5x5 = 25</option>
+                                <option value="18">6x3 = 18</option>
+                                <option value="24">6x4 = 24</option>
+                                <option value="30">6x5 = 30</option>
+                                <option value="36">6x6 = 36</option>
+                                <option value="28">7x4 = 28</option>
+                                <option value="35">7x5 = 35</option>
+                                <option value="42">7x6 = 42</option>
+                                <option value="49">7x7 = 49</option>
+                                <option value="32">8x4 = 32</option>
+                                <option value="40">8x5 = 40</option>
+                                <option value="48">8x6 = 48</option>
+                                <option value="56">8x7 = 56</option>
+                                <option value="64">8x8 = 64</option>
+                            </select>
+                            <label class="lblUpdateableNumber" id="lblNumberOfPages">86 pages</label>
+                            <br />
+                            <label class="colorLabel">Color Patches / Piece Count: </label>
+                            <div id="divPiecesPerPage" class="lblUpdateableNumber">0 pieces per page</div>
+                            <div>
+                                <input type="color" id="color1" value="#ffffff" />
+                                <input type="range" min="0" max="100" value="100" class="slider smallNumber colorCount" id="sldColor1" />
+                                <label class="lblUpdateableNumber" id="lblColor1Count"># </label>
+                            </div>
+                            <div>
+                                <input type="color" id="color2" value="#000000" />
+                                <input type="range" min="0" max="100" value="0" class="slider smallNumber colorCount" id="sldColor2" />
+                                <label class="lblUpdateableNumber" id="lblColor2Count"># </label>
+                            </div>
+                            <div>
+                                <input type="color" id="color3" value="#ff00ff" />
+                                <input type="range" min="0" max="100" value="0" class="slider smallNumber colorCount" id="sldColor3" />
+                                <label class="lblUpdateableNumber" id="lblColor3Count"># </label>
+                            </div>
+                            <div>
+                                <input type="color" id="color4" value="#0000ff" />
+                                <input type="range" min="0" max="100" value="0" class="slider smallNumber colorCount" id="sldColor4" />
+                                <label class="lblUpdateableNumber" id="lblColor4Count"># </label>
+                            </div>
+                            <label id="error"></label>
+                            <label class="colorLabel">Page Margin :</label>
+                            <br />
+                            <input name="margin" class="smallNumber" value="20" id="numMargin" type="number" min="20" max="40" />
+                            <br /><br />
+                            <Button id="btnCreateTemplate2" value="">Create Templates</Button>
+                        </div>
+                        <div class="sidebar">
+                            <canvas id="canPreview" height="477" style="border:1px solid #c3c3c3;">
+                                Your browser does not support HTML5 Canvas.
+                            </canvas>
+                            <label class="caption">Preview</label>
+                        </div>
+                        <div id="cleared"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
