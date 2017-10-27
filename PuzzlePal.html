@@ -24,7 +24,7 @@
     <div class="container dialog2">
         <div class="main">
             <div title="Create Puzzle Piece Print Templates" id="dialog">
-                <form action="" method="post">
+                <form action="" >
                     <div class="wrapper2">
                         <div class="sidebar2">
                             <img class="rotate45" id="imgPuzzlePiece" align="left" margin-top="-80px" margin-right="25px" width="50" height="50" src="images/pp.png" />
@@ -101,7 +101,8 @@
                             <br />
                             <input name="margin" class="smallNumber" value="20" id="numMargin" type="number" min="20" max="40" />
                             <br /><br />
-                            <Button id="btnCreateTemplate2" value="">Create Templates</Button>
+                            <Button id="btnCreateTemplate2" value="">Create Templates</Button><br /><br />
+                            <a id="aPrintYourTemplates"  href="PuzzlePalPrint.html?rows=ROWS&cols=COLS&start=START&end=END&pages=PAGES&colorCount1=COLORCOUNT1&color1='COLOR1'&colorCount2=COLORCOUNT2&color2='COLOR2'&colorCount3=COLORCOUNT3&color3='COLOR3'&colorCount4=COLORCOUNT4&color4='COLOR4'&margin='MARGIN'"></a>
                         </div>
                         <div class="sidebar">
                             <canvas id="canPreview" height="477" style="border:1px solid #c3c3c3;">

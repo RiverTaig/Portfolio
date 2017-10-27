@@ -1,5 +1,4 @@
-﻿
-var $;
+﻿var $;
 $(document).ready(function () {
 
     $(function () {
@@ -51,7 +50,28 @@ $(document).ready(function () {
     //    string color1, string color2, string color3, string color4)
     // Validating Form Fields.....
     $("#btnCreateTemplate").click(function (e) {
-        var data = {
+        //alert("asdf");
+        e.preventDefault();
+        //debugger;
+        //var aHrefString = "PuzzlePalPrint.html?rows=ROWS&cols=COLS&start=START&end=END&pages=PAGES&colorCount1=COLORCOUNT1&color1='COLOR1'&colorCount2=COLORCOUNT2&color2='COLOR2'&colorCount3=COLORCOUNT3&color3='COLOR3'&colorCount4=COLORCOUNT4&color4='COLOR4'&margin='MARGIN'";
+        //var start = $('start').val;
+        //var end = $('end').val;
+        //var piecesPerPage = parseInt($("#cboLayout").val());
+        //var cc1 = $("#lblColor1Count").text;
+        //var cc2 = $("#lblColor2Count").text;
+        //var cc3 = $("#lblColor3Count").text;
+        //var cc4 = $("#lblColor4Count").text;
+        //$('#aPrintYourTemplates').text("Print Templates");
+        //aHrefString = aHrefString.replace("ROWS", 5);
+        //aHrefString = aHrefString.replace("COLS", 6);
+        //aHrefString = aHrefString.replace("START", start);
+        //aHrefString = aHrefString.replace("END", end);
+        //aHrefString = aHrefString.replace("COLORCOUNT1", cc1);
+        //aHrefString = aHrefString.replace("COLORCOUNT2", cc2);
+        //aHrefString = aHrefString.replace("COLORCOUNT3", cc3);
+        //aHrefString = aHrefString.replace("COLORCOUNT4", cc4);
+        //$('#aPrintYourTemplates').attr('href', aHrefString);
+        /*var data = {
             startNumber: 1,
             endNumber: 1024,
             rows: 4,
@@ -77,7 +97,7 @@ $(document).ready(function () {
             error: function (e) {
                 alert("error " + e);
             }
-        });
+        });*/
     });
 });
 
@@ -168,8 +188,32 @@ function updateCounts(target, delta) {
 
     $("#lblNumberOfPages").text(requiredPages + pageOrPages);
     drawPreview(color1Count, color2Count, color3Count, color4Count);
+    addLink();
 }
 
+function addLink() {
+    //alert("add link");
+    var aHrefString = "PuzzlePalPrint.html?rows=ROWS&cols=COLS&start=START&end=END&pages=PAGES&colorCount1=COLORCOUNT1&color1='COLOR1'&colorCount2=COLORCOUNT2&color2='COLOR2'&colorCount3=COLORCOUNT3&color3='COLOR3'&colorCount4=COLORCOUNT4&color4='COLOR4'&margin='MARGIN'";
+    var start = $('#start').val();
+    var end = $('#end').val();
+    var piecesPerPage = parseInt($("#cboLayout").val());
+    var cc1 = $("#lblColor1Count").text();
+    var cc2 = $("#lblColor2Count").text();
+    var cc3 = $("#lblColor3Count").text();
+    var cc4 = $("#lblColor4Count").text();
+    $('#aPrintYourTemplates').text("Print Templates");
+    aHrefString = aHrefString.replace("START", start);
+    aHrefString = aHrefString.replace("END", end);
+    aHrefString = aHrefString.replace("COLORCOUNT1", cc1);
+    aHrefString = aHrefString.replace("COLORCOUNT2", cc2);
+    aHrefString = aHrefString.replace("COLORCOUNT3", cc3);
+    aHrefString = aHrefString.replace("COLORCOUNT4", cc4);
+    var rows = getRowsAndColums()["rows"]; 
+    var cols = getRowsAndColums()["cols"];
+    aHrefString = aHrefString.replace("ROWS", rows);
+    aHrefString = aHrefString.replace("COLS", cols);
+    $('#aPrintYourTemplates').attr('href', aHrefString);
+}
 var convertBase = function (val, base1, base2) {
     if (typeof (val) == "number") {
         return parseInt(String(val)).toString(base2);
@@ -191,7 +235,14 @@ function log(message, params) {
     }
     console.log("LOG: " + message + details);
 }
-
+function getRowsAndColums() {
+    var rows = parseInt($("#cboLayout option:selected").text().split('x')[0][0]);
+    var cols = parseInt($("#cboLayout option:selected").text().split('x')[1].split('=')[0]);
+    return {
+        rows: rows,
+        cols:cols
+    }
+}
 function drawPreview(colorCount1, colorCount2, colorCount3, colorCount4) {
     try {
         clearCanvas();
@@ -220,8 +271,8 @@ function drawPreview(colorCount1, colorCount2, colorCount3, colorCount4) {
         ctx.lineTo(0, 0);
         ctx.stroke();
         var cboRowsColumns = $("#cboLayout");
-        var rows = parseInt($("#cboLayout option:selected").text().split('x')[0][0]);
-        var cols = parseInt($("#cboLayout option:selected").text().split('x')[1].split('=')[0]);
+        var rows = getRowsAndColums()["rows"]; //parseInt($("#cboLayout option:selected").text().split('x')[0][0]);
+        var cols = getRowsAndColums()["cols"];  //parseInt($("#cboLayout option:selected").text().split('x')[1].split('=')[0]);
 
         var paperHeight = canvas.height - (2 * margin);
         var paperWidth = canvas.width - (2 * margin);
