@@ -1,0 +1,10 @@
+D:\Personal\Portfolio\Server\PuzzlePalServer\bin\Debug\PuzzlePalServer.exe.config
+D:\Personal\Portfolio\Server\PuzzlePalServer\bin\Debug\PuzzlePalServer.exe
+D:\Personal\Portfolio\Server\PuzzlePalServer\bin\Debug\PuzzlePalServer.pdb
+D:\Personal\Portfolio\Server\PuzzlePalServer\obj\Debug\PuzzlePalServer.csprojResolveAssemblyReference.cache
+D:\Personal\Portfolio\Server\PuzzlePalServer\obj\Debug\PuzzlePalServer.Form1.resources
+D:\Personal\Portfolio\Server\PuzzlePalServer\obj\Debug\PuzzlePalServer.Properties.Resources.resources
+D:\Personal\Portfolio\Server\PuzzlePalServer\obj\Debug\PuzzlePalServer.csproj.GenerateResource.Cache
+D:\Personal\Portfolio\Server\PuzzlePalServer\obj\Debug\PuzzlePalServer.exe
+D:\Personal\Portfolio\Server\PuzzlePalServer\obj\Debug\PuzzlePalServer.pdb
+D:\Personal\Portfolio\Server\PuzzlePalServer\bin\Debug\Puzzles\A1F6CDDF-8BD2-4985-B765-DF218DCF7AC5\Properties.txt

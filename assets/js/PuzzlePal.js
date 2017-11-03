@@ -192,8 +192,11 @@ function updateCounts(target, delta) {
 }
 
 function addLink() {
-    //alert("add link");
-    var aHrefString = "PuzzlePalPrint.html?rows=ROWS&cols=COLS&start=START&end=END&pages=PAGES&colorCount1=COLORCOUNT1&color1='COLOR1'&colorCount2=COLORCOUNT2&color2='COLOR2'&colorCount3=COLORCOUNT3&color3='COLOR3'&colorCount4=COLORCOUNT4&color4='COLOR4'&margin='MARGIN'";
+    var aHrefString = "PuzzlePalPrint.html?height=HEIGHT&width=WIDTH&rows=ROWS&cols=COLS&start=START&end=END&pages=PAGES&colorCount1=COLORCOUNT1&color1='COLOR1'&colorCount2=COLORCOUNT2&color2='COLOR2'&colorCount3=COLORCOUNT3&color3='COLOR3'&colorCount4=COLORCOUNT4&color4='COLOR4'&margin=MARGIN";
+    var height = parseInt($('#numHeight').val());
+    var width = parseInt($('#numWidth').val());
+    var margin = parseInt($('#numMargin').val());
+
     var start = $('#start').val();
     var end = $('#end').val();
     var piecesPerPage = parseInt($("#cboLayout").val());
@@ -201,6 +204,10 @@ function addLink() {
     var cc2 = $("#lblColor2Count").text();
     var cc3 = $("#lblColor3Count").text();
     var cc4 = $("#lblColor4Count").text();
+    var color1 = $('#color1').val() ;
+    var color2 = $('#color2').val() ;
+    var color3 = $('#color3').val() ;
+    var color4 = $('#color4').val();
     $('#aPrintYourTemplates').text("Print Templates");
     aHrefString = aHrefString.replace("START", start);
     aHrefString = aHrefString.replace("END", end);
@@ -208,6 +215,13 @@ function addLink() {
     aHrefString = aHrefString.replace("COLORCOUNT2", cc2);
     aHrefString = aHrefString.replace("COLORCOUNT3", cc3);
     aHrefString = aHrefString.replace("COLORCOUNT4", cc4);
+    aHrefString = aHrefString.replace("COLOR1", color1);
+    aHrefString = aHrefString.replace("COLOR2", color2);
+    aHrefString = aHrefString.replace("COLOR3", color3);
+    aHrefString = aHrefString.replace("COLOR4", color4);
+    aHrefString = aHrefString.replace("HEIGHT", height);
+    aHrefString = aHrefString.replace("WIDTH", width);
+    aHrefString = aHrefString.replace("MARGIN", margin);
     var rows = getRowsAndColums()["rows"]; 
     var cols = getRowsAndColums()["cols"];
     aHrefString = aHrefString.replace("ROWS", rows);
@@ -339,6 +353,7 @@ function drawPreview(colorCount1, colorCount2, colorCount3, colorCount4) {
         }
         img.src = "http://localhost/pp.png";
         img.className += "rotate45";
+
     } catch (Err) {
         log("Error in DrawPreview! " + Err.toString());
     }
