@@ -11,6 +11,9 @@ namespace PuzzlePalServer
         public Patch(List<PuzzleVertex> verticies) {
             Verticies = verticies;
         }
+        /// <summary>
+        /// These are the verticies that make up the boundary of the patch
+        /// </summary>
         public List<PuzzleVertex> Verticies
         {
             get;set;
@@ -18,6 +21,26 @@ namespace PuzzlePalServer
         public bool IsValid
         {
             get;set;
+        }
+        /// <summary>
+        /// This color represents the absolute value of RGB values that a color can be from the background to be considered background.
+        /// For example, 23,56,13 means that R can be off by a value of 23, G by 56 and B by only 13. 
+        /// </summary>
+        public static Color HowCloseToColorToBeBackground
+        {
+            get;set;
+        }
+
+        public bool IsBackgroundColor(Bitmap bmp, int x, int y)
+        {
+            Color xyColor = bmp.GetPixel(x, y);
+            if ( Math.Abs(xyColor.R - PatchBackgroundColor.R) < HowCloseToColorToBeBackground.R &&
+                 Math.Abs(xyColor.G - PatchBackgroundColor.G) < HowCloseToColorToBeBackground.G &&
+                 Math.Abs(xyColor.B - PatchBackgroundColor.B) < HowCloseToColorToBeBackground.B)
+            {
+                return true;
+            }
+            return false;
         }
         public Piece Piece
         {

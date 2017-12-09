@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+
+
+    <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script  src="assets/js/PuzzlePal.js"></script>
+    <script src="assets/js/PuzzlePalShared.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.js"></script>
+    <script src="spectrum.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <link rel="stylesheet"  href="assets/css/PuzzlePal.css" />
+    <link rel="stylesheet" href="assets/css/Spectrum.css" />
+</head>
+<body>
+    <canvas width="816" height="1056" id="myCanvas"></canvas>
+    <!--
+      <button id="drawit">Draw</button>-->
+
+    <div class="container dialog2">
+        <div class="main">
+            <div title="Create Puzzle Piece Print Templates" id="dialog">
+                <form action="" >
+                    <div class="wrapper2">
+                        <div class="sidebar2">
+                            <img class="rotate45" id="imgPuzzlePiece" align="left" margin-top="-80px" margin-right="25px" width="50" height="50" src="images/pp.png" />
+                        </div>
+                        <div class="content2">
+                            You can use this form to print out the templates required for photographing your puzzle pieces or to replace templates you have already printed. Choose background colors that strongly contrast with the colors of your puzzle. White is a good choice for
+                            most puzzles, but you will likely need other colors too. Select the number of pieces per page such that each piece fits comfortably in its color patch.
+                            <!--It's a good idea to print out a test page. Remember when you photograph each page to orient the pieces so that the pieces corners "point to" the corners of the color patch.-->
+                        </div>
+                        <div class="cleared2"></div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="wrapper">
+                        <div class="contentx">
+                            <!--START NUMBER -->
+                            <label class="colorLabel">Start - End Piece :</label>
+                            <br />
+                            <input name="total" class="smallNumber" value="1" id="start" type="number" min="1" max="6560" /> -
+                            <input name="end" class="smallNumber" id="end" value="45" type="number" min="1" max="6560" />
+
+                            <br />
+                            <label class="lblUpdateableNumber" id="lblPieceCount"></label>
+                            /
+                            <label class="lblUpdateableNumber" id="lblNumberOfPages">86 pages</label>
+                            <br/>
+                            <label class="colorLabel">Patches: </label>
+                            <div id="divPiecesPerPage" class="lblUpdateableNumber">0 pieces per page</div>
+                            <div>
+                                <input type="color" id="color1" value="#ffffff" />
+                                <input type="range" min="0" max="100" value="100" class="slider smallNumber colorCount" id="sldColor1" />
+                                <label class="lblUpdateableNumber" id="lblColor1Count"># </label>%
+                            </div>
+                            <div>
+                                <input type="color" id="color2" value="#ff0000" />
+                                <input type="range" min="0" max="100" value="0" class="slider smallNumber colorCount" id="sldColor2" />
+                                <label class="lblUpdateableNumber" id="lblColor2Count"># </label>%
+                            </div>
+                            <div>
+                                <input type="color" id="color3" value="#00ff00" />
+                                <input type="range" min="0" max="100" value="0" class="slider smallNumber colorCount" id="sldColor3" />
+                                <label class="lblUpdateableNumber" id="lblColor3Count"># </label>%
+                            </div>
+                            <div>
+                                <input type="color" id="color4" value="#0000ff" />
+                                <input type="range" min="0" max="100" value="0" class="slider smallNumber colorCount" id="sldColor4" />
+                                <label class="lblUpdateableNumber" id="lblColor4Count"># </label>%
+                            </div>
+                            <div>
+                                <input type="color" id="color5" value="#000000" />
+                                <input type="range" min="0" max="100" value="0" class="slider smallNumber colorCount" id="sldColor5" />
+                                <label class="lblUpdateableNumber" id="lblColor5Count"># </label>%
+                            </div>
+                            <label id="error"></label>
+                            <br />
+                            <label class="colorLabel">Page Width / Height :</label>
+                            <br />
+                            <input name="pageWidth" class="smallNumber" value="900" id="numPageWidth" type="number" min="200" max="4000" />
+                            /
+                            <input name="pageHeight" class="smallNumber" value="900" id="numPageHeight" type="number" min="200" max="4000" />
+                            <br />
+                            <label class="colorLabel">Patch Size / Page Margin :</label>
+                            <br />
+                            <input name="patchSize" class="smallNumber" value="200" id="numPatchSize" type="number" min="100" max="1000" />
+                            /
+                            <input name="margin" class="smallNumber" value="20" id="numMargin" type="number" min="20" max="40" />
+                            <br /><br />
+                            <label class="colorLabel">:</label>
+                            <br /><br />
+                            <a id="aPrintYourTemplates"  href="PuzzlePalPrint.html?rows=ROWS&cols=COLS&start=START&end=END&pages=PAGES&colorCount1=COLORCOUNT1&color1='COLOR1'&colorCount2=COLORCOUNT2&color2='COLOR2'&colorCount3=COLORCOUNT3&color3='COLOR3'&colorCount4=COLORCOUNT4&color4='COLOR4'&margin='MARGIN'"></a>
+                        </div>
+                        <div class="sidebarx">
+                            <div id="divPreview"    style="background:#dddddd;height:550px;width:425px;border:1px solid #c3c3c3;">
+                              test
+                            </div>
+                            <label class="caption">Preview</label>
+                        </div>
+                        <div id="cleared"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

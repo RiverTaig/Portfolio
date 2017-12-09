@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <style>
+
+
+    </style>
+</head>
+<video id="video" width="640" height="480" autoplay></video>
+<button id="snap">Snap Photo</button>
+<canvas id="canvas" width="640" height="480"></canvas>
+<div id ="colorPatch" style="height:30px;width:30px;background-color:hotpink">
+
+</div>
+<body>
+<script>
+    var video = document.getElementById('video');
+    //setInterval(takePicture, 3000);
+
+    function takePicture(){
+        context.drawImage(video, 0, 0, 640, 480);
+        var imgd = context.getImageData(0, 0, 10, 10);
+        var pix = imgd.data;
+        for (var i = 0; i < pix.length; i++) {
+            var pixel = pix[i];
+        }
+
+    }
+
+    // Get access to the camera!
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        // Not adding `{ audio: true }` since we only want video now
+        navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
+            video.src = window.URL.createObjectURL(stream);
+            video.play();
+        });
+    }
+    // Elements for taking the snapshot
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+    var video = document.getElementById('video');
+    canvas.addEventListener('mousemove', function(evt){
+        var imgd = context.getImageData(evt.x - 741, evt.y - 8,1,1);
+        var pix = imgd.data;
+        var r = pix[0];
+        var g = pix[1];
+        var b = pix[2];
+        var a = pix[3];
+        console.log(r);
+        document.getElementById("colorPatch").style.backgroundColor = 'rgb(' + [r,g,b].join(',') + ')';
+    },false);
+    // Trigger photo take
+    document.getElementById("snap").addEventListener("click", function () {
+        takePicture();
+    });
+
+</script>
+</body>
+</html>

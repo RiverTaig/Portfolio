@@ -152,6 +152,13 @@ namespace PuzzlePalServer
             return null;
         }
 
+        /// <summary>
+        /// Page properties are stored in Properties.txt.  For each page, there is an entry like so: 
+        /// 1-15.jpg,1,15,5,3,125,11,0,1,3,#FFFFFF,#FFFFFF,#000000,#0000FF,#FF00FF
+        //  (0)FileName,(1)StartPiece,(2)EndPiece,(3)PageRows,(4)PageColumns,(5)PatchDiscoverThreshold,(6-9)Patch1-4Count,(10-13)Patch1-4Colors
+        /// </summary>
+        /// <param name="pageProperties"></param>
+        /// <param name="puzzlePage"></param>
         private static void SetPageProperties(List<string> pageProperties, Page puzzlePage)
         {
             puzzlePage.AssociatedImageFile = pageProperties[0];

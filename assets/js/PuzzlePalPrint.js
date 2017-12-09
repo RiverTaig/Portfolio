@@ -5,33 +5,24 @@ $(document).ready(function () {
         return str.replace(new RegExp(find, 'g'), replace);
     }
     $(function () {
-        //debugger;
+        //margin,size,pageWidth,pageHeight,colorPercent1,colorPercent2,colorPercent3,colorPercent4,colorPercent5,start,end,preview,div
         var params = getUrlParams();
         var htmlString = "";
         var rowGap = 10;
         var columnGap = 2;
-        var rows = parseInt(params["rows"]);
-        var cols = parseInt(params["cols"]);
+        //var rows = parseInt(params["rows"]);
+        //var cols = parseInt(params["cols"]);
         var width = parseInt(params["width"]);
-        var height = parseInt(params["height"]);
         var margin = parseInt(params["margin"]);
-
-        var size = (670.0 / (cols ));//- (2 * margin);
-        if (rows > cols)
-        {
-            size = (670.0 / (rows  ));
-        }
-       // size = 100;
-
-        /*var paperHeight = height - (2 * margin);
-        var paperWidth = width - (2 * margin);
-        var size1 = (paperWidth / cols) - columnGap;
-        var size2 = (paperHeight / rows) - rowGap;
-        var size = size1 < size2 ? size1 : size2;*/
-        
-        var offsetC = 4 + size;
-        var offsetR = size + rowGap;
-
+        var size = parseInt(params["size"]);
+        var tableWidth = parseInt(params["pageWidth"]);
+        var tableHeight = parseInt(params["pageHeight"]);
+        var effectiveWidth = tableWidth - (2 * margin);
+        var effectiveHeight = tableHeight - (2 * margin);
+        var cols = effectiveWidth / (size+10);
+        var rows = effectiveHeight / (size + 10);
+        cols = parseInt(cols);
+        rows = parseInt(rows);
         var pieceCounter = parseInt(params["start"]);
         var start = parseInt(params["start"]);
         var end = parseInt(params["end"]);
@@ -56,25 +47,25 @@ $(document).ready(function () {
         var colorArray = [color1, color2, color3, color4];
         for (var p = 0; p < requiredPages; p++) {
 
-            htmlString +=  "<table class='pagebreak' style='width:670;margin:" + margin +  "px;'>"
-            for (var r = 0; r < rows ; r++) {
+            htmlString += "<table cellspacing='10' class='pagebreak' style='background:pink;width:" + tableWidth + "height:" + tableHeight + ";margin:0px;'>"
+            for (var r = 0; r < rows-1 ; r++) {
                 htmlString += "<tr>";
-                for (var c = 0; c < cols ; c++) {
+                for (var c = 0; c < cols-1 ; c++) {
                     var colorRemainder = colorCounter % sumCcs;
                     if (colorRemainder < ccs[3]) { colorIndex = 4; }
                     if (colorRemainder < ccs[2]) { colorIndex = 3; }
                     if (colorRemainder < ccs[1]) { colorIndex = 2; }
                     if (colorRemainder < ccs[0]) { colorIndex = 1; }
                     var colNoQuote = colorArray[colorIndex - 1];
-                    var width = size + "px";
-                    var height = size + "px";
-                    var border = "2px solid #f0f";
-                    var style = 'width:WIDTH;height:HEIGHT;border:BORDER;background:BACKGROUND;';
-                    style = style.replace("WIDTH", width);
-                    style = style.replace("HEIGHT", height);
-                    style = style.replace("BORDER", border);
-                    style = style.replace("BACKGROUND", colNoQuote);
-                    htmlString += "<td>" + pieceCounter + "<div style='" + style + "'></div></td>"
+                    var divwidth = size + "px";
+                    var divheight = size + "px";
+                    var divborder = "3px solid #000";
+                    var divstyle = 'width:WIDTH;height:HEIGHT;border:BORDER;background:BACKGROUND;';
+                    divstyle = divstyle.replace("WIDTH", divwidth);
+                    divstyle = divstyle.replace("HEIGHT", divheight);
+                    divstyle = divstyle.replace("BORDER", divborder);
+                    divstyle = divstyle.replace("BACKGROUND", colNoQuote);
+                    htmlString += "<td>" + pieceCounter + "<div style='" + divstyle + "'></div></td>"
                     colorCounter++;
                     pieceCounter++;
                 }

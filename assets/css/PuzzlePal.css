@@ -140,7 +140,7 @@ text-align:center
     }
     
     .wrapper {
-      margin-right: 325px;
+      margin-right: 425px;
     }
     /*
     .wrapper {
@@ -169,15 +169,15 @@ text-align:center
       border: 3;
     }
     
-    .content {
+    .contentx {
       float: left;
       width: 100%;
     }
     
-    .sidebar {
+    .sidebarx {
       float: right;
-      width: 300px;
-      margin-right: -320px;
+      width: 425px;
+      margin-right: -425px;
       background-color: #fff;
     }
     

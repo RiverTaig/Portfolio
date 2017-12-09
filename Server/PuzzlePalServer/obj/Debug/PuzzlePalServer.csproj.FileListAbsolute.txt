@@ -8,3 +8,4 @@ D:\Personal\Portfolio\Server\PuzzlePalServer\obj\Debug\PuzzlePalServer.csproj.Ge
 D:\Personal\Portfolio\Server\PuzzlePalServer\obj\Debug\PuzzlePalServer.exe
 D:\Personal\Portfolio\Server\PuzzlePalServer\obj\Debug\PuzzlePalServer.pdb
 D:\Personal\Portfolio\Server\PuzzlePalServer\bin\Debug\Puzzles\A1F6CDDF-8BD2-4985-B765-DF218DCF7AC5\Properties.txt
+D:\Personal\Portfolio\Server\PuzzlePalServer\obj\Debug\PuzzlePalServer.Form2.resources

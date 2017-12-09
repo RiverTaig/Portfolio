@@ -122,6 +122,10 @@ namespace PuzzlePalServer
         {
             get;set;
         }
+
+
+
+
         public string ProcessPage()
         {
             try
@@ -147,9 +151,41 @@ namespace PuzzlePalServer
         {
             Patches = new List<Patch>();
             double areaThreshold = (ImageHeight * ImageWidth * ValidPatchPercentageOfPageThreshold) / (PageRows * PageColumns );
-            foreach (KeyValuePair<int, List<PuzzleVertex>> kvp in ContiguousPatchBoundariesColors)
+            List<double> patchAreas = new List<double>();
+            List<double> patchVerticies = new List<double>();
+            int maxCluster = ContiguousPatchBoundariesColors.Max(x => x.Value.Count);
+            int minCluster = ContiguousPatchBoundariesColors.Min(x => x.Value.Count);
+            int averageCluster = (maxCluster + minCluster) / 2;
+            double testCut = averageCluster;
+            double cutSize = maxCluster - averageCluster;
+            while (true)
+            {
+                cutSize = cutSize / 2;
+                var test = ContiguousPatchBoundariesColors.Where(x => x.Value.Count > testCut);
+                if(test.Count() < PageRows * PageColumns)
+                {
+                    testCut -= cutSize;
+                }
+                if(test.Count() > PageRows * PageColumns)
+                {
+                    testCut += cutSize;
+                }
+                if(test.Count() == PageRows * PageColumns)
+                {
+                    foreach(var v in test)
+                    {
+                        Patch patch = new Patch(v.Value);
+                        Patches.Add(patch);
+                    }
+                    break;
+                }
+            }
+            
+            /*foreach (KeyValuePair<int, List<PuzzleVertex>> kvp in ContiguousPatchBoundariesColors)
             {
                 Patch patch = new Patch(kvp.Value);
+                patchAreas.Add(patch.Area);
+                patchVerticies.Add(patch.Verticies.Count);
                 if ( (patch.Verticies.Count > NumberOfPatchVerticesThreshold) && (patch.Area > areaThreshold) && (Math.Abs(patch.SquareNess - 1) < SquarenessOfPatchThreshold))
                 {
                     patch.IsValid = true;
@@ -157,7 +193,7 @@ namespace PuzzlePalServer
                 }
                 patch.IsValid = false;
 
-            }
+            }*/
         }
 
         /// <summary>
@@ -168,11 +204,16 @@ namespace PuzzlePalServer
         {
             get { return .3; }
         }
+        //When processing the page image, adjacent verticies that make up the patch boundary colors are grouped together. For each patch, there are
+        //four sides of a patch, and obviously a patch can fill no more than the width of the image divided by the number of columns.  Thus the max possible
+        //would be  4 * (width of the image divided by the number of columns).  The calculation assumes only one pixel per patch boundary.  In practice, the
+        //colors are seldom consistently close enough to form these boundaries, so 1/4 of that number is used. To get more pixels to fall into the bin of what
+        //is considered a patch boundary, adjust the 6th argument of Properties.txt so that the sum of the RGB deltas is less than that value. 
         public double NumberOfPatchVerticesThreshold
         {
             get
             {
-                return this.ImageWidth / PageColumns;
+                return this.ImageWidth / PageColumns  / 4.0;
             }
         }
         public double SquarenessOfPatchThreshold
@@ -222,12 +263,12 @@ namespace PuzzlePalServer
                         }
 
                     }
-                }//
+                }
             }
             return contiguousPatchesOfBoundary;
         }
 
-        private void GetPossiblePatchBoundaryPoints()
+        private void GetPossiblePatchBoundaryPointsOLD()
         {
             Bitmap im = new Bitmap(this.Directory + "\\" + this.AssociatedImageFile);
             this.ImageWidth = im.PhysicalDimension.Width;
@@ -249,23 +290,166 @@ namespace PuzzlePalServer
                 }
             }
         }
+        private void GetPossiblePatchBoundaryPoints()
+        {
+            Bitmap im = new Bitmap(this.Directory + "\\" + this.AssociatedImageFile);
+            this.ImageWidth = im.PhysicalDimension.Width;
+            this.ImageHeight = im.PhysicalDimension.Height;
+            this.PossiblePatchBoundaryPoints = new List<PuzzlePalServer.PuzzleVertex>();
+            Queue<Point> q = new Queue<Point>();
+            q.Enqueue(new Point(0, 0));
+            HashSet<string> haveBeenInQ = new HashSet<string>();
+            haveBeenInQ.Add("0,0");
+            double averageL = 1.00;
+            double averageR = im.GetPixel(0, 0).R;
+            double averageG = im.GetPixel(0, 0).G;
+            double averageB = im.GetPixel(0, 0).B;
+            int samples = 1;
+            while (q.Count > 0)
+            {
+                Point currentPoint = q.Dequeue();
+                int x = currentPoint.X;
+                int y = currentPoint.Y;
+                //string key = x.ToString() + "," + y.ToString();
+                //visitedPoints.Add(key);
+                if (IsContrastingColor(im, x,y, ref averageR, ref averageG, ref averageB, ref averageL, ref samples))
+                {
+                    PuzzleVertex pv = new PuzzleVertex(x,y);
+                    pv.Red = im.GetPixel(x,y).R;
+                    pv.Green = im.GetPixel(x, y).G;
+                    pv.Blue = im.GetPixel(x, y).B;
+                    this.PossiblePatchBoundaryPoints.Add(pv);
+                }
+                else
+                {
+                    for(int i = -1; i < 2; i++)
+                    {
+                        int newX = x + i;
+                        for (int j = -1; j < 2; j++)
+                        {
+                            int newY = y + j;
+                            string key = newX + "," + newY;
+                            if(newX > -1 && newY > -1 && newX < im.Width && newY < im.Height)
+                            {
+                                key = newX.ToString() + "," + newY.ToString();
+                                if(haveBeenInQ.Contains(key) == false)
+                                {
+                                    q.Enqueue(new Point(newX, newY));
+                                    haveBeenInQ.Add(key);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 
+        }
+        /// <summary>
+        /// uses: https://ux.stackexchange.com/questions/82056/how-to-measure-the-contrast-between-any-given-color-and-white to determine how contrasting a 
+        /// color is from its background
+        /// </summary>
+        /// <param name="bmp"></param>
+        /// <param name="column"></param>
+        /// <param name="row"></param>
+        /// <param name="averageR"></param>
+        /// <param name="averageG"></param>
+        /// <param name="averageB"></param>
+        /// <param name="averageL"></param>
+        /// <param name="samples"></param>
+        /// <returns></returns>
+        public bool IsContrastingColor(Bitmap bmp, int column, int row, ref double averageR, ref double averageG, ref double averageB, ref double averageL, ref int samples)
+        {
+
+            if (column == 178 && row == 31)
+            {
+
+            }
+            if (column == 26 && row == 37)
+            {
+
+            }
+            try
+            {
+                Color color = bmp.GetPixel(column, row);
+                double r = color.R;
+                double b = color.B;
+                double g = color.G;
+                double Rg = 0;double Gg = 0; double Bg = 0;
+                if (r <= 10)
+                {
+                    Rg = r / 3294.0;
+                }
+                else
+                {
+                    Rg = Math.Pow(r / 269 + .0513, 2.4);
+                }
+                if (b <= 10)
+                {
+                    Bg = b / 3294.0;
+                }
+                else
+                {
+                    Bg = Math.Pow(b / 269 + .0513, 2.4);
+                }
+                if (g <= 10)
+                {
+                    Gg = g / 3294.0;
+                }
+                else
+                {
+                    Gg = Math.Pow(g / 269 + .0513, 2.4);
+                }
+                double L = 0.2126 * Rg + 0.7152 * Gg + 0.0722 * Bg;
+                double contrastRatio = 0;
+                if(averageL > L)
+                {
+                    contrastRatio = (averageL + 0.05) / (L + 0.05);
+                }
+                else
+                {
+                    contrastRatio = (L + 0.05) / (averageL + 0.05);
+                }
+                
+                samples = samples+1;
+                averageR = (((samples-1) * averageR) + r) / samples;
+                averageG = (((samples - 1) * averageG) + g) / samples;
+                averageB = (((samples - 1) * averageB) + b) / samples;
+                averageL = (((samples - 1) * averageL) + L) / samples;
+                if (contrastRatio > 2 && samples > 10)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
         public bool IsPatchBoundary(Bitmap bmp, int column, int row)
         {
-            Color color = bmp.GetPixel(column, row);
-            int r = color.R;
-            int b = color.B;
-            int g = color.G;
-            //magenta or black is the background patch color 
-            int deltaR = this.PatchBoundaryColor.R - r;
-            int deltaG = this.PatchBoundaryColor.G - g;
-            int deltaB = this.PatchBoundaryColor.B - b;
-            if ((Math.Abs(deltaR) < PatchDiscoveryThreshold) && (Math.Abs(deltaG) < PatchDiscoveryThreshold) && (Math.Abs(deltaB) < PatchDiscoveryThreshold))
+            try
             {
-                return true;
+                Color color = bmp.GetPixel(column, row);
+                int r = color.R;
+                int b = color.B;
+                int g = color.G;
+                //magenta or black is the background patch color 
+                int deltaR = this.PatchBoundaryColor.R - r;
+                int deltaG = this.PatchBoundaryColor.G - g;
+                int deltaB = this.PatchBoundaryColor.B - b;
+                if ((Math.Abs(deltaR) < PatchDiscoveryThreshold) && (Math.Abs(deltaG) < PatchDiscoveryThreshold) && (Math.Abs(deltaB) < PatchDiscoveryThreshold))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else {
-                return false;
+            catch(Exception ex)
+            {
+                throw (ex);
             }
         }
         
